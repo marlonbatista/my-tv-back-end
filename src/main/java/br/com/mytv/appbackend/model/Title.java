@@ -26,7 +26,7 @@ import br.com.mytv.appbackend.model.enums.Genre;
 public class Title {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idTitle;
 
 	@NotEmpty

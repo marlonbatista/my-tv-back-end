@@ -18,11 +18,20 @@ public class UserForm {
     @NotEmpty
     @NotNull
     @Length(min = 3, max = 255)
-    private String copassword;
+    private String confPassword;
     @NotEmpty
     @NotNull
     @Length(min = 3, max = 255)
     private String email;
+
+
+    public String getConfPassword() {
+        return confPassword;
+    }
+
+    public void setConfPassword(String confPassword) {
+        this.confPassword = confPassword;
+    }
 
     public String getName() {
         return name;
@@ -40,13 +49,6 @@ public class UserForm {
         this.password = password;
     }
 
-    public String getCopassword() {
-        return copassword;
-    }
-
-    public void setCopassword(String copassword) {
-        this.copassword = copassword;
-    }
 
     public String getEmail() {
         return email;

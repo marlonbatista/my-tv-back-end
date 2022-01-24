@@ -1,5 +1,7 @@
 package br.com.mytv.appbackend.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +21,11 @@ public class TitleService {
         return this.repository.getById(id);
     }
 
+    @Transactional
     public Title save(TitleForm form) {
         try {
             Title title = this.parseTitleFormToTitle(form);
-            this.repository.save(title);
-            return title;
+            return this.repository.save(title);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return null;

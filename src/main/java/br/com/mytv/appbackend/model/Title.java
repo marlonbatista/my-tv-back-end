@@ -1,7 +1,6 @@
 package br.com.mytv.appbackend.model;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,9 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.sun.istack.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.mytv.appbackend.model.enums.Category;
 import br.com.mytv.appbackend.model.enums.Genre;

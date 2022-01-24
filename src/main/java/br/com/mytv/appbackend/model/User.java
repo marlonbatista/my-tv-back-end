@@ -19,6 +19,7 @@ import com.sun.istack.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name = "UserMyTv")
@@ -60,7 +61,11 @@ public class User implements UserDetails {
 
 		this.email = email;
 		this.userName = userName;
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
+		Perfil perfil = new Perfil();
+		perfil.setId(1);
+		perfil.setName("COMMOM");
+		this.perfis.add(perfil);
 	}
 
 	public String getEmail() {
@@ -83,6 +88,7 @@ public class User implements UserDetails {
 		return idUser;
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}

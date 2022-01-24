@@ -22,22 +22,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // public UserOutputDto createrUser(UserForm userInput) throws Exception {
-    // try {
-    // User user = new User(
-    // userInput.getEmail(),
-    // userInput.getName(),
-    // userInput.getPassword());
-    // // log.info("Criando {}", user);
-    // User newUser = userRepository.save(user);
-
-    // return convertUsertoUserOutputDto(newUser);
-    // } catch (Exception e) {
-    // log.error(e.getMessage(), e);
-    // throw e;
-    // }
-    // }
-
     public UserOutputDto convertUsertoUserOutputDto(User user) {
         return new UserOutputDto(user.getUserName(), user.getEmail());
     }
@@ -58,16 +42,15 @@ public class UserService {
     private User parseUserFormToUser(UserForm userForm) throws Exception {
 
         String password = userForm.getPassword();
-        String confPassword = userForm.getCopassword();
+        String confPassword = userForm.getConfPassword();
 
         try {
             if (this.ValidPassword(password, confPassword)) {
                 log.info("Parsing userForm to User");
-                String encodPassword = this.parsePasswordToSHA256(password);
                 return new User(
                         userForm.getEmail(),
                         userForm.getName(),
-                        encodPassword);
+                        userForm.getPassword());
             }
             return null;
         } catch (Exception e) {
@@ -87,8 +70,6 @@ public class UserService {
         String encoded = Base64.getEncoder().encodeToString(hash);
         return encoded;
 
-        // MessageDigest md = MessageDigest.getInstance("SHA-256");
-        // return md.digest(password.getBytes(StandardCharsets.UTF_8));
     }
 
     public String parseSHA256ToPassword(String password) {

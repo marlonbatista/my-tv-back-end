@@ -4,11 +4,13 @@ import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ import br.com.mytv.appbackend.service.TitleService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "title")
+@RequestMapping("/title")
 public class TitleController {
 
 	@Autowired
@@ -46,6 +48,15 @@ public class TitleController {
 			List<Title> titles = repository.getTopFourTitlesByCategoList();
 			return TitleDto.convert(titles);
 		}
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<TitleDto> getById(@PathVariable Long id) {
+		Title title = repository.getById(id);
+		if(title != null) {
+			return ResponseEntity.ok(new TitleDto(title));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping

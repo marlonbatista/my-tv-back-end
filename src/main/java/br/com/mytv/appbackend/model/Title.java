@@ -59,6 +59,14 @@ public class Title {
 	@NotNull
 	private String description;
 
+	@NotEmpty
+	@NotNull
+	private String producer;
+
+	@Temporal(value = TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Calendar releaseDate;
+
 	public String getName() {
 		return name;
 	}
@@ -135,12 +143,37 @@ public class Title {
 		this.description = description;
 	}
 
+	public String getProducer() {
+		return producer;
+	}
+
+	public void setProducer(String producer) {
+		this.producer = producer;
+	}
+
+	public Calendar getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Calendar releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
 	public Title() {
 
 	}
 
-	public Title(@NotEmpty String name, Calendar dateRegister, String secondName, Genre genre,
-			List<PlataformTitle> plataforms, Category category, @NotEmpty String poster, @NotEmpty String description) {
+	public Title(
+		@NotEmpty String name, 
+		Calendar dateRegister, 
+		String secondName, 
+		Genre genre,
+		List<PlataformTitle> plataforms, 
+		Category category, 
+		@NotEmpty String poster, 
+		@NotEmpty String description, 
+		@NotEmpty String producer,
+		Calendar releaseDate ) {
 		this.name = name;
 		this.dateRegister = dateRegister;
 		this.secondName = secondName;
@@ -150,6 +183,8 @@ public class Title {
 		this.category = category;
 		this.poster = poster;
 		this.description = description;
+		this.producer = producer;
+		this.releaseDate = releaseDate;
 	}
 
 	@Override
